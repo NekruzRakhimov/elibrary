@@ -9,6 +9,7 @@ def print_menu():
     print("3. Показать список жанров")
     print("4. Показать детальную информацию по id книги (автор и жанры)")
     print("5. Добавить автора")
+    print("6. Поиск книги по названию")
 
 
 def app():
@@ -75,6 +76,13 @@ def app():
                 print("Автор успешно создан!")
             except Exception as e:
                 print(f"Что-то пошло не так! {e}")
+            print("=" * 20)
+        elif cmd == 6:
+            print("=" * 20)
+            query = input("Введите название и часть название книги: ")
+            books = db.search_book(query)
+            for book in books:
+                print(f"ID: {book[0]} - Название: {book[1]}.")
             print("=" * 20)
         else:
             print("Вы ввели несуществующею команду. Попробуйте еще раз!")

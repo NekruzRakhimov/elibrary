@@ -115,3 +115,22 @@ def get_book_full_info_by_id(book_id):
 def create_author(full_name):
     with connect_db() as conn, conn.cursor() as cur:
         cur.execute("INSERT INTO authors (full_name) VALUES (%s)", (full_name,))
+
+
+def search_book(query):
+    with connect_db() as conn, conn.cursor() as cur:
+        cur.execute("SELECT * FROM books WHERE title ILIKE %s;", (f"%{query}%",))
+
+        books = cur.fetchall()
+        return books
+
+
+"""
+tmp_memory(cursor):
+[
+    (1,"Богатый папа, бедный папа"),
+    (2,Золотой теленок),
+    (3,Искусство общения),
+    (4,Алхимик)
+]
+"""
